@@ -12,7 +12,7 @@ build/src/deposit.o: src/deposit.c
 	gcc $(CFLAGS) src/deposit.c -o build/src/deposit.o 
 
 clean:
-	rm -rf bin/vklad build/deposit.o build/vklad.o
+	rm -rf bin/vklad bin/deposit-test build/*.o
 
 test: deposit-test
 
