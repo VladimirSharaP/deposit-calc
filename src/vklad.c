@@ -3,15 +3,14 @@
 
 int main()
 {
-	int a, b;
-	printf("Введите срок вклада в днях и сумму вклада\n");
-	scanf("%d %d", &a, &b);
-	if((a > 0) && (a < 366) && (b > 10000))
-	{
-		deposit(a, b);
-	}
-	else
-	{
-		printf ("Введен неверный формат данных.");
-	}
+    int period, amound, iincome;
+    printf("Input period and amound:");
+    scanf("%d %d", &period, &amound);
+    if(check(period, amound))
+    {
+        return 0;
+    }
+    iincome=interest_income(period, amound);
+    printf("Interest income: %d\n", iincome);
+    return 0;
 }

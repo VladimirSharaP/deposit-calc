@@ -1,15 +1,26 @@
-CFLAGS= -Werror -c
+CFLAGS =-Wall -Werror -c
+TFLAGS =-I thirdparty -I src  
+.PHONY: clean test
 
-.PHONY: clean
+bin/vklad: build/src/vklad.o build/src/deposit.o
+	gcc build/src/vklad.o build/src/deposit.o -o bin/vklad
 
-bin/vklad: build/vklad.o build/deposit.o
-	gcc build/vklad.o build/deposit.o -o bin/vklad
+build/src/vklad.o: src/vklad.c
+	gcc $(CFLAGS) src/vklad.c -o build/src/vklad.o
 
-build/vklad.o: src/vklad.c
-	gcc $(CFLAGS) src/vklad.c -o build/vklad.o
-
-build/deposit.o: src/deposit.c
-	gcc $(CFLAGS) src/deposit.c -o build/deposit.o 
+build/src/deposit.o: src/deposit.c
+	gcc $(CFLAGS) src/deposit.c -o build/src/deposit.o 
 
 clean:
 	rm -rf bin/vklad build/deposit.o build/vklad.o
+
+test: deposit-test
+
+deposit-test: build/test/vklad.o build/test/deposit-test.o build/src/deposit.o
+	gcc build/test/vklad.o build/test/deposit-test.o build/src/deposit.o -o bin/deposit-test
+
+build/test/vklad.o: test/vklad.c
+	gcc $(TFLAGS) $(CFLAGS) test/vklad.c -o build/test/vklad.o
+
+build/test/deposit-test.o: test/deposit-test.c
+	gcc $(TFLAGS) $(CFLAGS) test/deposit-test.c -o build/test/deposit-test.o
