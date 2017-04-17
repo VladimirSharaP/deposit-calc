@@ -41,7 +41,7 @@ CTEST(Income, test1){
 }
 
 CTEST(Income, test2){
-    ASSERT_EQUAL(-10000, interest_income(30, 100001));
+    ASSERT_EQUAL(-11000, interest_income(30, 110000));
 }
 
 CTEST(Income, test3){
